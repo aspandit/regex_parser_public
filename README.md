@@ -24,9 +24,27 @@
 # regex_parser
 Regular expression parser library
 
+# Status
+THIS PROJECT IS NOT CURRENTLY A TRUE REGEX PARSER. It currently only counts the number of occurrences of a string literal
+within a test string.
+
+*This section is pending completion.*
+
+# Overview and Approach
+*This section is pending completion.*
+
+# TODOs
+*This section is pending completion.*
+
+# Features
+*This section is pending completion.*
+
 # Operation
 Execute the test program using the command "make run_release" on the command line.
 
 Currently, executing the make target "run_release" by executing "make run_release" on the command line takes in a string
 literal and test string from command line input and outputs the number of occurrences of the string literal in the
 test string.
+
+# Testing
+*This section is pending completion.*
