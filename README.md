@@ -101,3 +101,4 @@ run on the command line, e.g., `make <target>`
 - Create **Python** and command line entry methods/points for ***test.c***
 ## Documentation
 - Supplement documentation with project-specific **GDB** walkthrough(s)
+- Write setup instructions for **Ubuntu** and for **Windows**(using **WSL2**)

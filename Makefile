@@ -16,13 +16,16 @@ INCLUDE_DIR=./include
 LIB_DIR=./lib
 SRC_DIR=./src
 TEST_DIR=./test
-DEBUG_ARGS=-g 
+DEBUG_ARGS=-g
+
+PYTHON_CMD=python
+UPDATE_PYTHON_CMD_MESSAGE=ERROR: Error occurred. Please check PYTHON_CMD setting in Makefile.
 
 run_release: compile
 	./out/main_release.o
 
 run_test: compile_test $(TEST_DIR)/regex_parser/*.py
-	venv/bin/python3.10 $(TEST_DIR)/regex_parser/test.py
+	$(PYTHON_CMD) $(TEST_DIR)/regex_parser/test.py || (echo "${UPDATE_PYTHON_CMD_MESSAGE}"; exit 1)
 
 run_debug: debug
 	gdb out/main_debug.o
