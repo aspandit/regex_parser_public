@@ -14,25 +14,27 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "regex_parser.h"
+#include <string.h>
+#include <stdbool.h>
+#include "../include/regex_parser.h"
 
 #define STRING_MAX 255
 
-char *getInput()
+char *getInput(int size)
 {
-    char *buff;
+    char * buff;
     char str[STRING_MAX+1];
     char c;
     int idx;
 
-    for(idx = 0;idx < STRING_MAX && ((c = getchar()) != '\n');idx++)
+    for(idx = 0;idx < STRING_MAX && ((c = getchar()) != EOF && c != '\n');idx++)
     {
         str[idx] = c;
     }
     str[idx] = '\0';
     buff = str;
 
-    return buff; /* return a global("buff") instead of local("str") reference */
+    return buff;
 }
 
 int main(int argc, char **argv)
@@ -44,10 +46,28 @@ int main(int argc, char **argv)
         exit(-1);
     }
 
-    char *regex_buffer = getInput();
-    char *str_buffer = getInput();
+    char *regex_buffer, *str_buffer, *buff;
+    bool done;
+    int size;
 
-    printf("%d",count(regex_buffer,str_buffer));
+    do {
+        buff = getInput(size);
+        regex_buffer = malloc(size*sizeof(char));
+        strcpy(regex_buffer,buff);
+
+        buff = getInput(size);
+        str_buffer = malloc(size*sizeof(char));
+        strcpy(str_buffer,buff);
+
+        // if either buffer is empty, we are done
+        done = (*regex_buffer == '\0' || *str_buffer == '\0');
+        if(!done)
+        {
+            printf("%d\n", count(regex_buffer, str_buffer));
+        }
+        free(regex_buffer); // free regex_buffer after every use
+        free(str_buffer); // free str_buffer after every use
+    } while(!done);
 
     return 0;
 }

@@ -18,7 +18,7 @@ SRC_DIR=./src
 TEST_DIR=./test
 DEBUG_ARGS=-g
 
-PYTHON_CMD=python
+PYTHON_CMD=python3
 UPDATE_PYTHON_CMD_MESSAGE=ERROR: Error occurred. Please check PYTHON_CMD setting in Makefile.
 
 run_release: compile

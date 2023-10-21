@@ -15,6 +15,7 @@
 import subprocess
 import sys
 from pathlib import Path
+import filecmp
 
 from io import open
 
@@ -30,11 +31,10 @@ with open(Path(test_files_dir_path, "input.txt"), "r", encoding="utf-8") as inp_
     pairs = [iter(inp_file.readline, '')]*2
     for [search_string, test_string] in zip(*pairs):  # last line in "input.txt" file should be empty line
         [search_string, test_string] = [search_string.strip(), test_string.strip()]
-        exp_file.write(str(test_string.count(search_string)))
+        exp_file.write(f"{str(test_string.count(search_string))}\n")
 
 # compare the expected and actual outputs
-with open(Path(test_files_dir_path, "actual.txt"), "r", encoding="utf-8") as act_file, \
-        open(Path(test_files_dir_path, "expected.txt"), "r", encoding="utf-8") as exp_file:
-    for actual, expected in zip(act_file, exp_file):
-        if actual != expected:
-            print(f"At least one comparison failed: actual={actual} in {Path(act_file.name).name} and expected={expected} in {Path(exp_file.name).name}")
+if not filecmp.cmp(Path(test_files_dir_path, "expected.txt").as_posix(), Path(test_files_dir_path, "actual.txt").as_posix(), shallow=False):
+    print("FAIL")
+else:
+    print("PASS")

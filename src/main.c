@@ -73,28 +73,30 @@ char *getInput()
 
 int main(int argc,char **argv)
 {
-    printf("Search string(literal): ");
-    char *regex = getInput();
-    printf("Test string: ");
-    char *str = getInput();
+    char *regex, *str;
 
-    if(regex == NULL || str == NULL)
-    {
-        if(regex != NULL)
-        {
-            free(regex);
+    do {
+        printf("Search string(literal): ");
+        regex = getInput();
+        printf("Test string: ");
+        str = getInput();
+
+        if (regex == NULL || str == NULL) {
+            if (regex != NULL) {
+                free(regex);
+            }
+            if (str != NULL) {
+                free(str);
+            }
+
+            return 0;
         }
-        if(str != NULL)
-        {
-            free(str);
-        }
-        exit(-1);
-    }
 
-    printf("Number of occurrences: %d\n",count(regex,str));
+        printf("Number of occurrences: %d\n", count(regex, str));
 
-    free(regex);
-    free(str);
+        free(regex);
+        free(str);
+    } while(*regex != '\0' && *str != '\0');
 
     return 0;
 }
