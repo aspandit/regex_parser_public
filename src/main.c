@@ -13,7 +13,7 @@
 //    limitations under the License.
 
 /**
- * https://docs.python.org/3/library/re.html - this regex parser adheres to the regex description here
+ * https://docs.python.org/3/library/re.html
  */
 
 #include <stdio.h>

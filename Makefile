@@ -21,16 +21,18 @@ DEBUG_ARGS=-g
 PYTHON_CMD=python3
 UPDATE_PYTHON_CMD_MESSAGE=ERROR: Error occurred. Please check PYTHON_CMD setting in Makefile.
 
-run_release: compile
+all: run
+
+run: compile
 	./out/main_release.o
 
-run_test: compile_test $(TEST_DIR)/regex_parser/*.py
+test: compile_test $(TEST_DIR)/regex_parser/*.py $(TEST_DIR)/files/input.txt
 	$(PYTHON_CMD) $(TEST_DIR)/regex_parser/test.py || (echo "${UPDATE_PYTHON_CMD_MESSAGE}"; exit 1)
 
-run_debug: debug
+debug: do_debug
 	gdb out/main_debug.o
 
-debug: $(SRC_DIR)/*.c $(INCLUDE_DIR)/*.h
+do_debug: $(SRC_DIR)/*.c $(INCLUDE_DIR)/*.h
 	mkdir -p out
 	gcc $(DEBUG_ARGS) -o out/main_debug.o --include-directory=$(INCLUDE_DIR) $(SRC_DIR)/main.c $(SRC_DIR)/regex_parser.c
 
